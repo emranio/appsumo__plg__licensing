@@ -1,0 +1,13 @@
+{
+    "name": "wpmetcom/appsumo__plg__licensing",
+    "type": "wp-plugin",
+    "license": "GPLv3",
+    "autoload": {
+        "classmap": [
+            "core"
+        ]
+    },
+    "require": {
+        "curl/curl": "^2.3"
+    }
+}
