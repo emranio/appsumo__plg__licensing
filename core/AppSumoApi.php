@@ -1,6 +1,6 @@
 <?php
 
-namespace AppSumo__PLG__Licensing;
+namespace AppSumo__GUTENKIT__Licensing;
 
 // exit if file is called directly
 if (!defined('ABSPATH')) {
@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 }
 
 // if class already defined, bail out
-if (class_exists('AppSumo__PLG__Licensing\AppSumoApi')) {
+if (class_exists('AppSumo__GUTENKIT__Licensing\AppSumoApi')) {
 	return;
 }
 
@@ -17,7 +17,7 @@ if (class_exists('AppSumo__PLG__Licensing\AppSumoApi')) {
  * This class will handle Api request
  *
  * @package    WPF
- * @subpackage AppSumo__PLG__Licensing
+ * @subpackage AppSumo__GUTENKIT__Licensing
  * @author     WPFunnels Team <admin@getwpfunnels.com>
  */
 class AppSumoApi
@@ -46,15 +46,15 @@ class AppSumoApi
 
 	public function __construct()
 	{
-		$this->prefix       = 'appsumo__plg__licensing';
+		$this->prefix       = 'appsumo__gutenkit__licensing';
 	}
 
 	// register endpoints for appsumo's notifications/ webhooks
-	public function register_rest_route_appsumo__plg__notification_webhook()
+	public function register_rest_route_appsumo__gutenkit__notification_webhook()
 	{
-		register_rest_route('appsumo__plg__licensing/v1', 'notification', array(
+		register_rest_route('appsumo__gutenkit__licensing/v1', 'notification', array(
 			'methods'  => 'POST',
-			'callback' => [$this, 'rest_callback_appsumo__plg__notification'],
+			'callback' => [$this, 'rest_callback_appsumo__gutenkit__notification'],
 			'permission_callback' => '__return_true',
 		));
 
@@ -73,13 +73,13 @@ class AppSumoApi
 		$password = $request->get_param('password');
 
 		if(empty($username) || empty($password)){
-			return $this->get_error('invalid_request', esc_html__('Empty username or password.', 'appsumo__plg__licensing'));
+			return $this->get_error('invalid_request', esc_html__('Empty username or password.', 'appsumo__gutenkit__licensing'));
 		}
 
 		$user = get_user_by( 'login', $username );
 
 		if ( !$user || !wp_check_password( $password, $user->data->user_pass, $user->ID) ){
-			return $this->get_error('invalid_request', esc_html__('User authentication failed.', 'appsumo__plg__licensing'));
+			return $this->get_error('invalid_request', esc_html__('User authentication failed.', 'appsumo__gutenkit__licensing'));
 		}
 
 		$token_string = Globals::get_jwt_auth_secret_key() . $user->ID . time();
@@ -89,7 +89,7 @@ class AppSumoApi
 
 		$token = $wp_hasher->HashPassword($token_string);
 
-		set_transient( 'appsumo__plg__licensing_jwt_token_'.$token, time(), 60 * 60 * 2 );
+		set_transient( 'appsumo__gutenkit__licensing_jwt_token_'.$token, time(), 60 * 60 * 2 );
 
 		return array(
 			// 'length' =>strlen($token),
@@ -100,7 +100,7 @@ class AppSumoApi
 
 
 	// WP REST API callback
-	public function rest_callback_appsumo__plg__notification(\WP_REST_Request $request)
+	public function rest_callback_appsumo__gutenkit__notification(\WP_REST_Request $request)
 	{
 
 		$this->request = $request;
@@ -113,10 +113,10 @@ class AppSumoApi
 		$this->action_name = sanitize_key($this->request->get_param('action'));
 
 		if (empty($this->request->get_param('uuid'))) {
-			return $this->get_error('invalid_request', esc_html__('MISSING_UUID API request is invalid.', 'appsumo__plg__licensing'));
+			return $this->get_error('invalid_request', esc_html__('MISSING_UUID API request is invalid.', 'appsumo__gutenkit__licensing'));
 		}
 
-		$this->action_class = new \AppSumo__PLG__Licensing\AppSumoActions($request, $this->action_name);
+		$this->action_class = new \AppSumo__GUTENKIT__Licensing\AppSumoActions($request, $this->action_name);
 
 		switch ($this->action_name):
 			case ('activate'):
@@ -134,7 +134,7 @@ class AppSumoApi
 
 		endswitch;
 
-		return apply_filters('appsumo__plg__licensing_notification_endpoint_response', $response);
+		return apply_filters('appsumo__gutenkit__licensing_notification_endpoint_response', $response);
 	}
 
 
@@ -145,12 +145,12 @@ class AppSumoApi
 	{
 		$token = ltrim(sanitize_text_field( $_SERVER['HTTP_AUTHORIZATION'] ?? '' ), 'Bearer ');
 		if(empty($token) || strlen($token) != 60){
-			return $this->get_error('empty_invalid_token', esc_html__('Empty or invalid token', 'appsumo__plg__licensing'));
+			return $this->get_error('empty_invalid_token', esc_html__('Empty or invalid token', 'appsumo__gutenkit__licensing'));
 		}
 		
-		$token_transient = get_transient( 'appsumo__plg__licensing_jwt_token_'.$token );
+		$token_transient = get_transient( 'appsumo__gutenkit__licensing_jwt_token_'.$token );
 		if(empty($token_transient)){
-			return $this->get_error('invalid_token', esc_html__('Invalid token', 'appsumo__plg__licensing'));
+			return $this->get_error('invalid_token', esc_html__('Invalid token', 'appsumo__gutenkit__licensing'));
 		}
 
 		return true;
@@ -182,13 +182,13 @@ class AppSumoApi
 		$password = $this->request->get_param('activation_email');
 		$hashedPassword = $wp_hasher->HashPassword($password);
 
-		$redirect_url = esc_url_raw( get_config('appsumo__plg__redirect_link'));
-		$redirect_url .= '?'.\AppSumo__PLG__Licensing\Globals::get_request_key().'='.\AppSumo__PLG__Licensing\Globals::get_request_value();
+		$redirect_url = esc_url_raw( get_config('appsumo__gutenkit__redirect_link'));
+		$redirect_url .= '?'.\AppSumo__GUTENKIT__Licensing\Globals::get_request_key().'='.\AppSumo__GUTENKIT__Licensing\Globals::get_request_value();
 		$redirect_url .= '&email=' . $this->request->get_param('activation_email');
 		$redirect_url .= '&token=' . $hashedPassword;
 
 		$data               = new \stdClass();
-		$data->message      = esc_html__('User Account and License created', 'appsumo__plg__licensing');
+		$data->message      = esc_html__('User Account and License created', 'appsumo__gutenkit__licensing');
 		$data->redirect_url = $redirect_url;
 
 		$response = new \WP_REST_Response();
@@ -213,7 +213,7 @@ class AppSumoApi
 		}
 
 		$data          = new \stdClass();
-		$data->message = esc_html__('AppSumo-'.\AppSumo__PLG__Licensing\Globals::get_product_name() .' Plan Updated.', 'appsumo__plg__licensing');
+		$data->message = esc_html__('AppSumo-'.\AppSumo__GUTENKIT__Licensing\Globals::get_product_name() .' Plan Updated.', 'appsumo__gutenkit__licensing');
 
 		$response = new \WP_REST_Response();
 		$response->set_status(200);
@@ -240,7 +240,7 @@ class AppSumoApi
 		}
 
 		$data          = new \stdClass();
-		$data->message = esc_html__('Product refunded. User Account and License removed', 'appsumo__plg__licensing');
+		$data->message = esc_html__('Product refunded. User Account and License removed', 'appsumo__gutenkit__licensing');
 
 		$response = new \WP_REST_Response();
 		$response->set_status(200);
@@ -256,7 +256,7 @@ class AppSumoApi
 	public function endpoint_not_found()
 	{
 
-		$error = $this->get_error('endpoint_not_found', esc_html__('No such API action found.', 'appsumo__plg__licensing'));
+		$error = $this->get_error('endpoint_not_found', esc_html__('No such API action found.', 'appsumo__gutenkit__licensing'));
 
 		return rest_ensure_response($error);
 	}

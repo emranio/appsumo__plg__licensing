@@ -22,13 +22,13 @@ Validates the user credentials, username and password, and returns a token to us
 Codes can be found at `core/AppSumoApi.php:69`
 
 # Installation
-- Change the values from this config file: `appsumo__plg__licensing/core/config-globals.php`
-- Add `<?php do_action('appsumo__plg__footer_userform'); ?>` into your footer to show the user form modal.
+- Change the values from this config file: `appsumo__gutenkit__licensing/core/config-globals.php`
+- Add `<?php do_action('appsumo__gutenkit__footer_userform'); ?>` into your footer to show the user form modal.
 
 
 # Appsumo Setup
 Go to https://appsumo.com/partners/profile/ and fillup the following fields.
 - Token URL: https://WEBSITE/wp-json/jwt-auth/v1/token
-- Notification URL: https://WEBSITE/wp-json/appsumo__plg__licensing/v1/notification
+- Notification URL: https://WEBSITE/wp-json/appsumo__gutenkit__licensing/v1/notification
 - Username: WPUSER
 - Secret: PASSWORD_FOR_THE_WPUSER

@@ -1,5 +1,5 @@
 {
-    "name": "wpmetcom/appsumo__plg__licensing",
+    "name": "wpmetcom/appsumo__gutenkit__licensing",
     "type": "wp-plugin",
     "license": "GPLv3",
     "autoload": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppSumo__PLG__Licensing;
+namespace AppSumo__GUTENKIT__Licensing;
 
 // exit if file is called directly
 if (!defined('ABSPATH')) {
@@ -8,14 +8,14 @@ if (!defined('ABSPATH')) {
 }
 
 // if class already defined, bail out
-if (class_exists('AppSumo__PLG__Licensing')) {
+if (class_exists('AppSumo__GUTENKIT__Licensing')) {
     return;
 }
 
 class Globals
 {
 
-    public static function get_appsumo__plg__parent_product_id()
+    public static function get_appsumo__gutenkit__parent_product_id()
     {
         // woo commerce product id. not  variation, but main product id.
         // return 18691; // accounts.wpmet.com
@@ -27,9 +27,9 @@ class Globals
         // list out the woocommerce variation id's for appsumo.
         $variations = array(
             // test
-            'appsumo__plg__tier1' => 708,
-            'appsumo__plg__tier2' => 1755,
-            'appsumo__plg__tier3' => 2380,
+            'appsumo__gutenkit__tier1' => 708,
+            'appsumo__gutenkit__tier2' => 1755,
+            'appsumo__gutenkit__tier3' => 2380,
         );
         return isset($variations[$tier_name]) ? $variations[$tier_name] : 0;
     }
@@ -43,7 +43,7 @@ class Globals
         return get_option($key, $default);
     }
 
-    public static function get_appsumo__plg__redirect_link()
+    public static function get_appsumo__gutenkit__redirect_link()
     {
         return home_url('/manage-sites/');
     }
@@ -62,17 +62,17 @@ class Globals
 
     public static function get_product_slug()
     {
-        return '__plg__';
+        return '__gutenkit__';
     }
 
     public static function get_product_name()
     {
-        return '__plg__';
+        return '__gutenkit__';
     }
 
     public static function get_request_key()
     {
-        return '__plg__appsumo';
+        return '__gutenkit__appsumo';
     }
 
     public static function get_request_value()
