@@ -62,17 +62,17 @@ class Globals
 
     public static function get_product_slug()
     {
-        return 'wpmet';
+        return '__plg__';
     }
 
     public static function get_product_name()
     {
-        return 'Wpmet';
+        return '__plg__';
     }
 
     public static function get_request_key()
     {
-        return 'wpmet_appsumo';
+        return '__plg__appsumo';
     }
 
     public static function get_request_value()
