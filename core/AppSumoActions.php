@@ -90,8 +90,9 @@ class AppSumoActions
 		}
 
 		wp_set_current_user($user_id);
+		$uuid = $this->appsumo__gutenkit__uuid;
 
-		\write_log($user->ID, $user->user_login, $user->user_email, $password, $plan_id, $appsumo__gutenkit__product_variation);
+		\write_log($user->ID, $user->user_login, $user->user_email, $password, $plan_id, $appsumo__gutenkit__product_variation, $uuid);
 
 		// -----------------------------------------------------------------		
 		// starts product purchase creation
@@ -171,18 +172,20 @@ class AppSumoActions
 			return $this->get_error('invalid_uuid', esc_html__('Invalid UUID provide, no subscription found.', 'appsumo__gutenkit__licensing'));
 		}
 		
+
+		// -----------------------------------------------------------------
+		// create order and subscription
+		// -----------------------------------------------------------------
+		
 		// cancel the order and subscription
 		sumo_cancel_subscription($subscription_id);
-		
+
 		$appsumo__gutenkit__product_variation    = (int) Globals::get_variation_id($plan_id);
 		$address = array(
 			'first_name' => strstr($email, '@', true),
 			'email'      => $email,
 		);
 		
-		// -----------------------------------------------------------------
-		// create order and subscription
-		// -----------------------------------------------------------------
 		$order_args = array(
 			'status'        => 'pending',
 			'customer_id'   => $user->ID,
@@ -228,17 +231,19 @@ class AppSumoActions
 	public function remove_order()
 	{
 		$order_id   = Utils::get_order_id_from_key($this->appsumo__gutenkit__uuid);
-		$subscription_id = Utils::get_subscription_id_from_order_id($order_id);
+		// $subscription_id = Utils::get_subscription_id_from_order_id($order_id);
 
 		if (!$order_id) {
 			return $this->get_error('subscription_not_found', esc_html__('Purchase could not be found for the key', 'appsumo__gutenkit__licensing'));
 		}
+
+		\write_log($order_id);
 		
 		// -----------------------------------------------------------------
-		sumo_cancel_subscription($subscription_id);
+		// sumo_cancel_subscription($subscription_id);
 		
-		$order = wc_get_order($order_id);
-		$order->update_status('refunded');
+		// $order = wc_get_order($order_id);
+		// $order->update_status('refunded');
 
 		// -----------------------------------------------------------------
 
