@@ -60,7 +60,7 @@ class AppSumoActions
 		$user_exists = get_user_by('email', $email);
 
 		if ($user_exists) {
-			return $this->get_error('user_exists', esc_html__('User already exists.', 'appsumo__gutenkit__licensing'));
+			// return $this->get_error('user_exists', esc_html__('User already exists.', 'appsumo__gutenkit__licensing'));
 		}
 
 		$plan_id = sanitize_key($this->request->get_param('plan_id'));
@@ -91,41 +91,43 @@ class AppSumoActions
 
 		wp_set_current_user($user_id);
 
+		\write_log($user->ID, $user->user_login, $user->user_email, $password, $plan_id, $appsumo__gutenkit__product_variation);
+
 		// -----------------------------------------------------------------		
 		// starts product purchase creation
 		// -----------------------------------------------------------------
 
-		$order_args = array(
-			'status'        => 'pending',
-			'customer_id'   => $user_id,
-			'customer_note' => esc_html__('AppSumo Special Deal', 'appsumo__gutenkit__licensing'),
-			'parent'        => null,
-			'created_via'   => esc_html__('Created via AppSumo', 'appsumo__gutenkit__licensing'),
-			'cart_hash'     => null,
-		);
+		// $order_args = array(
+		// 	'status'        => 'pending',
+		// 	'customer_id'   => $user_id,
+		// 	'customer_note' => esc_html__('AppSumo Special Deal', 'appsumo__gutenkit__licensing'),
+		// 	'parent'        => null,
+		// 	'created_via'   => esc_html__('Created via AppSumo', 'appsumo__gutenkit__licensing'),
+		// 	'cart_hash'     => null,
+		// );
 
 
-		// Now we create the order
-		$order = wc_create_order($order_args);
+		// // Now we create the order
+		// $order = wc_create_order($order_args);
 
-		if (is_wp_error($order)) {
-			return $this->get_error('order_not_created', esc_html__('Order could not be created.', 'appsumo__gutenkit__licensing'));
-		}
-		$order->add_order_note('AppSumo: Purchase Created. Status changed to pending using AppSumo Integration.');
+		// if (is_wp_error($order)) {
+		// 	return $this->get_error('order_not_created', esc_html__('Order could not be created.', 'appsumo__gutenkit__licensing'));
+		// }
+		// $order->add_order_note('AppSumo: Purchase Created. Status changed to pending using AppSumo Integration.');
 
-		// The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
-		$order->add_product(wc_get_product($appsumo__gutenkit__product_variation), 1);
-		$order->set_address($address, 'billing');
+		// // The add_product() function below is located in /plugins/woocommerce/includes/abstracts/abstract_wc_order.php
+		// $order->add_product(wc_get_product($appsumo__gutenkit__product_variation), 1);
+		// $order->set_address($address, 'billing');
 
-		$order->calculate_totals();
+		// $order->calculate_totals();
 		
-		$result = $order->update_status( "completed", esc_html__( 'AppSumo order', 'appsumo__gutenkit__licensing' ), true );
+		// $result = $order->update_status( "completed", esc_html__( 'AppSumo order', 'appsumo__gutenkit__licensing' ), true );
 
 
-		// Add the note
-		$order->add_order_note( '1st time purchase via AppSumo.' );
-		$order->add_order_note( 'AppSumo UUID: ' . $this->appsumo__gutenkit__uuid );
-		do_action('woocommerce_payment_complete', $order->get_id());
+		// // Add the note
+		// $order->add_order_note( '1st time purchase via AppSumo.' );
+		// $order->add_order_note( 'AppSumo UUID: ' . $this->appsumo__gutenkit__uuid );
+		// do_action('woocommerce_payment_complete', $order->get_id());
 
 		// -----------------------------------------------------------------
 		// ends product purchase creation
@@ -145,7 +147,7 @@ class AppSumoActions
 	 */
 	public function update_order()
 	{
-		$email         = $this->request->get_param('activation_email');
+		$email = $this->request->get_param('activation_email');
 
 		$user = get_user_by('email',  $email);
 

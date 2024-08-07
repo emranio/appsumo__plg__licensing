@@ -18,7 +18,7 @@ if (!defined('WPINC')) {
 	die;
 }
 
-class AppSumo_Licensing
+class AppSumo_Licensing__PLG__
 {
 	public static function get_version()
 	{
@@ -39,73 +39,95 @@ class AppSumo_Licensing
 
 		new \AppSumo__GUTENKIT__Licensing\UserForm();
 	}
+
+	public static function auto_login()
+	{
+
+		if (!isset($_GET[\AppSumo__GUTENKIT__Licensing\Globals::get_request_key()]) || $_GET[\AppSumo__GUTENKIT__Licensing\Globals::get_request_key()] != \AppSumo__GUTENKIT__Licensing\Globals::get_request_value()) {
+			return;
+		}
+
+		$email = $_GET['email'] ?? '';
+		$token = $_GET['token'] ?? '';
+		if (empty($email) || empty($token)) {
+			return;
+		}
+
+		require_once(ABSPATH . 'wp-includes/class-phpass.php');
+		$wp_hasher = new \PasswordHash(8, FALSE);
+		$check = $wp_hasher->CheckPassword($email, $token);
+		if (!$check) {
+			return;
+		}
+
+		$user = get_user_by('email', $email);
+		if (!$user) {
+			return;
+		}
+
+		// check and return if it's an old user.
+		$is_appsumo__gutenkit__user = get_user_meta($user->ID, 'is_appsumo__gutenkit__user', true);
+		$is_appsumo__gutenkit__user_logged_in = get_user_meta($user->ID, 'is_appsumo__gutenkit__user_logged_in', true);
+		if ($is_appsumo__gutenkit__user != 'yes' || $is_appsumo__gutenkit__user_logged_in == 'yes') {
+			return;
+		}
+
+		// start procedure to login the user
+		if (is_user_logged_in()) {
+			wp_logout();
+		}
+
+		// hook in earlier than other callbacks to short-circuit them
+		add_filter('authenticate', static, 'allow_auto_login', 10, 3);
+
+		$user = wp_signon(array('user_login' => $user->user_login), true);
+		remove_filter('authenticate', [static, 'allow_auto_login'], 10);
+
+		if (is_a($user, 'WP_User')) {
+			wp_set_current_user($user->ID, $user->user_login);
+			if (is_user_logged_in()) {
+				update_user_meta($user->ID, 'is_appsumo__gutenkit__user_logged_in', 'yes');
+				wp_redirect(esc_url_raw(\AppSumo__GUTENKIT__Licensing\Globals::get_appsumo__gutenkit__redirect_link()));
+			}
+		}
+	}
+
+	function allow_auto_login($user, $username, $password)
+	{
+		return get_user_by('login', $username);
+	}
 }
 
 
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
+function write_log(...$log)
+{
+	if (true === WP_DEBUG) {
+		foreach ($log as $key => $data) {
+			if (is_array($data) || is_object($data)) {
+				error_log("$$key >> \n" . print_r($data, true));
+			} else {
+				error_log("$$key >> \n" . $data);
+			}
+		}
+	}
+}
+
 add_action('plugins_loaded', function () {
-	AppSumo_Licensing::boot();
+	try {
+		AppSumo_Licensing__PLG__::boot();
+	} catch (Exception $e) {
+		write_log("Caught exception in ParentClass: " . $e->getMessage());
+	} catch (Error $e) {
+		write_log("hello function fatal error: " . $e->getMessage());
+	}
 });
 
 add_action('init', function () {
-	if (!isset($_GET[\AppSumo__GUTENKIT__Licensing\Globals::get_request_key()]) || $_GET[\AppSumo__GUTENKIT__Licensing\Globals::get_request_key()] != \AppSumo__GUTENKIT__Licensing\Globals::get_request_value()) {
-		return;
-	}
-
-	$email = $_GET['email'] ?? '';
-	$token = $_GET['token'] ?? '';
-	if (empty($email) || empty($token)) {
-		return;
-	}
-
-	require_once(ABSPATH . 'wp-includes/class-phpass.php');
-	$wp_hasher = new \PasswordHash(8, FALSE);
-	$check = $wp_hasher->CheckPassword($email, $token);
-	if (!$check) {
-		return;
-	}
-
-	$user = get_user_by('email', $email);
-	if (!$user) {
-		return;
-	}
-
-	// check and return if it's an old user.
-	$is_appsumo__gutenkit__user = get_user_meta($user->ID, 'is_appsumo__gutenkit__user', true);
-	$is_appsumo__gutenkit__user_logged_in = get_user_meta($user->ID, 'is_appsumo__gutenkit__user_logged_in', true);
-	if ($is_appsumo__gutenkit__user != 'yes' || $is_appsumo__gutenkit__user_logged_in == 'yes') {
-		return;
-	}
-
-	// start procedure to login the user
-	if (is_user_logged_in()) {
-		wp_logout();
-	}
-
-	// hook in earlier than other callbacks to short-circuit them
-	add_filter('authenticate', 'appsumo__gutenkit__licensing_allow_auto_login', 10, 3);
-
-	$user = wp_signon(array('user_login' => $user->user_login), true);
-	remove_filter('authenticate', 'appsumo__gutenkit__licensing_allow_auto_login', 10);
-
-	if (is_a($user, 'WP_User')) {
-		wp_set_current_user($user->ID, $user->user_login);
-		if (is_user_logged_in()) {
-			update_user_meta($user->ID, 'is_appsumo__gutenkit__user_logged_in', 'yes');
-			wp_redirect(esc_url_raw(\AppSumo__GUTENKIT__Licensing\Globals::get_appsumo__gutenkit__redirect_link()));
-		}
+	try {
+		AppSumo_Licensing__PLG__::auto_login();
+	} catch (Exception $e) {
+		write_log("Caught exception in ParentClass: " . $e->getMessage());
+	} catch (Error $e) {
+		write_log("hello function fatal error: " . $e->getMessage());
 	}
 }, 10, 0);
-
-function appsumo__gutenkit__licensing_allow_auto_login($user, $username, $password)
-{
-	return get_user_by('login', $username);
-}

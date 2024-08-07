@@ -60,7 +60,7 @@ class UserForm
         }
 
         $nonce = wp_create_nonce('appsumo__gutenkit__save_userform'); // we will use this nonce to verify the form submission in userform.php.
-        include \AppSumo_Licensing::get_plugin_dir() . 'view/userform.php';
+        include \AppSumo_Licensing__PLG__::get_plugin_dir() . 'view/userform.php';
         update_user_meta($user->ID, 'appsumo__gutenkit__already_logged_in', 'yes');
     }
 }
