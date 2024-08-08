@@ -13,7 +13,7 @@ class Init
         add_filter('template_include', [$this, 'load_custom_template']);
         add_action('init', [$this, 'create_custom_page']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_custom_scripts']);
-        add_action('init', [$this, 'action_handler']);
+        add_action('template_redirect', [$this, 'action_handler']);
     }
 
     public function action_handler()

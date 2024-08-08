@@ -4,6 +4,7 @@ namespace Appsumo_PLG_Licensing\Webhooks;
 
 use Appsumo_PLG_Licensing\Env;
 use Appsumo_PLG_Licensing\LicenseModel;
+use Appsumo_PLG_Licensing\Util;
 
 class Init
 {
@@ -68,7 +69,8 @@ class Init
 
     public function activate()
     {
-        $this->payload['license_status'] = 'active';
+        $this->payload['product_id'] = Env::get('product_id');
+        $this->payload['variation_id'] = Util::variation_id_by_tier($this->payload('tier'));
         LicenseModel::create($this->payload);
 
         return $this->response('activated');
@@ -76,20 +78,19 @@ class Init
 
     public function deactivate()
     {
-        // find the license by license_key and update the status to deactivated
         LicenseModel::where('license_key', $this->payload('license_key'))->update(['license_status' => 'deactivated']);
         return $this->response('deactivated');
     }
 
     public function upgrade()
     {
-        // find old license by prev_license_key and get the user id and product id then set it to the new license
         $prev_license = LicenseModel::where('license_key', $this->payload('prev_license_key'))->first();
         if (!$prev_license) {
             return $this->response('prev_license_key not found', 400);
         }
         $this->payload['user_id'] = $prev_license->user_id;
         $this->payload['product_id'] = $prev_license->product_id;
+        $this->payload['variation_id'] = Util::variation_id_by_tier($this->payload('tier'));
         $this->payload['license_status'] = 'active';
         LicenseModel::create($this->payload);
 
@@ -97,13 +98,14 @@ class Init
     }
 
     public function downgrade()
-    {        // find old license by prev_license_key and get the user id and product id then set it to the new license
+    {
         $prev_license = LicenseModel::where('license_key', $this->payload('prev_license_key'))->first();
         if (!$prev_license) {
             return $this->response('prev_license_key not found', 400);
         }
         $this->payload['user_id'] = $prev_license->user_id;
         $this->payload['product_id'] = $prev_license->product_id;
+        $this->payload['variation_id'] = Util::variation_id_by_tier($this->payload('tier'));
         $this->payload['license_status'] = 'active';
         LicenseModel::create($this->payload);
 

@@ -16,6 +16,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "php": ">=8.2",
         "dbout/wp-orm": "^3.2"
     }
 }

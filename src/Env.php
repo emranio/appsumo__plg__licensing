@@ -25,7 +25,4 @@ class Env
         }
         return  self::$instance->config[$key] ?? null;
     }
-
-    private function __clone() {}
-    private function __wakeup() {}
 }

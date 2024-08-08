@@ -24,6 +24,26 @@ class LicenseModel extends AbstractModel
         'extra' => 'array',
     ];
 
+    // in boot, before create and before save, check if status field is changed, do some stuff
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if($model->license_status == 'active') {
+                (new EDD($model))->purchase();
+            }
+        });
+        static::updating(function ($model) {
+            if($model->license_status == 'active') {
+                (new EDD($model))->purchase();
+            }
+
+            if($model->license_status == 'inactive') {
+                (new EDD($model))->deactivate();
+            }
+        });
+    }
+
     public static function up()
     {
         global $wpdb;
@@ -36,6 +56,7 @@ class LicenseModel extends AbstractModel
                 id mediumint(9) NOT NULL AUTO_INCREMENT,
                 license_key varchar(70) NOT NULL,
                 product_id mediumint(9) NULL,
+                variation_id mediumint(9) NULL,
                 user_id mediumint(9) NULL,
                 tier varchar(50) NOT NULL,
                 prev_license_key varchar(70) NULL,
