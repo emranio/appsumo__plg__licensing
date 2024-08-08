@@ -1,8 +1,0 @@
-[19-Jun-2024 20:38:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_query_var() in /home/accountwpmet/public_html/wp-content/plugins/appsumo-redeem/templates/appsumo.php:3
-Stack trace:
-#0 {main}
-  thrown in /home/accountwpmet/public_html/wp-content/plugins/appsumo-redeem/templates/appsumo.php on line 3
-[15-Jul-2024 19:30:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_query_var() in /home/accountwpmet/public_html/wp-content/plugins/appsumo-redeem/templates/appsumo.php:3
-Stack trace:
-#0 {main}
-  thrown in /home/accountwpmet/public_html/wp-content/plugins/appsumo-redeem/templates/appsumo.php on line 3

@@ -1,13 +1,21 @@
 {
-    "name": "wpmetcom/appsumo__gutenkit__licensing",
-    "type": "wp-plugin",
-    "license": "GPLv3",
+    "name": "emran/appsumo-wp-licensing",
+    "description": "Appsumo v2 licensing plugin for WordPress",
+    "type": "wordpress-plugin",
+    "license": "GPL2",
     "autoload": {
-        "classmap": [
-            "core"
-        ]
+        "psr-4": {
+            "Appsumo_PLG_Licensing\\": "src/"
+        }
     },
+    "authors": [
+        {
+            "name": "Emran",
+            "email": "emranio@yahoo.com"
+        }
+    ],
+    "minimum-stability": "stable",
     "require": {
-        "curl/curl": "^2.3"
+        "dbout/wp-orm": "^3.2"
     }
 }
