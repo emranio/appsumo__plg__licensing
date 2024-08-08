@@ -21,7 +21,6 @@ class Util {
 
     public static function add_message($message, $type = 'success')
     {
-        \write_log('add_message', $message, $type);
         global $__plg__signup_message;
         $__plg__signup_message[] = [
             'message' => $message,

@@ -1,199 +1,60 @@
 $0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-add_message
-$1 >> 
-Code not found
-$2 >> 
-error
-$0 >> 
-Array
+stdClass Object
 (
-    [license_key] => c86ad3d7-3942-4d11-8814-b0bd81971691
-    [prev_license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
-    [plan_id] => c0e3375e7f360894ba72a988b43ab9df84f32e90e63c5a268054ae8c7c48a78e
-    [event] => upgrade
-    [event_timestamp] => 1671586387628
-    [created_at] => 1671586387624
-    [license_status] => inactive
-    [tier] => 2
-    [test] => 
-    [extra] => Array
-        (
-            [reason] => Upgraded by the customer
-        )
-
-)
-
-$1 >> 
-Array
-(
-    [0] => activate
-    [1] => deactivate
-    [2] => upgrade
-    [3] => downgrade
-    [4] => purchase
-)
-
-$2 >> 
-upgrade
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-hello function fatal error: Class "Dbout\WpOrm\Orm\AbstractModel" not found
-$0 >> 
-Array
-(
+    [id] => 2
     [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
-    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
-    [event] => activate
-    [license_status] => inactive
-    [event_timestamp] => 1318781876406
-    [created_at] => 1318738512
+    [product_id] => 0
+    [variation_id] => 
+    [user_id] => 
     [tier] => 1
-    [test] => 
-    [extra] => Array
-        (
-            [reason] => Purchased by the customer
-        )
-
+    [prev_license_key] => 
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [license_status] => inactive
+    [extra] => {"reason": "Purchased by the customer"}
+    [created_at] => 0000-00-00 00:00:00
+    [updated_at] => 0000-00-00 00:00:00
+    [event_timestamp] => 0000-00-00 00:00:00
 )
 
 $1 >> 
-Array
-(
-    [0] => activate
-    [1] => deactivate
-    [2] => upgrade
-    [3] => downgrade
-    [4] => purchase
-)
-
-$2 >> 
-activate
+3794577c-3dbc-11ec-9bbc-0242ac130002
 $0 >> 
-Array
+stdClass Object
 (
+    [id] => 2
     [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
-    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
-    [event] => activate
-    [license_status] => inactive
-    [event_timestamp] => 1318781876406
-    [created_at] => 1318738512
+    [product_id] => 0
+    [variation_id] => 
+    [user_id] => 
     [tier] => 1
-    [test] => 
-    [extra] => Array
-        (
-            [reason] => Purchased by the customer
-        )
-
+    [prev_license_key] => 
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [license_status] => inactive
+    [extra] => {"reason": "Purchased by the customer"}
+    [created_at] => 0000-00-00 00:00:00
+    [updated_at] => 0000-00-00 00:00:00
+    [event_timestamp] => 0000-00-00 00:00:00
 )
 
 $1 >> 
-Array
+3794577c-3dbc-11ec-9bbc-0242ac130002
+$0 >> 
+stdClass Object
 (
-    [0] => activate
-    [1] => deactivate
-    [2] => upgrade
-    [3] => downgrade
-    [4] => purchase
+    [id] => 2
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [product_id] => 0
+    [variation_id] => 
+    [user_id] => 
+    [tier] => 1
+    [prev_license_key] => 
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [license_status] => inactive
+    [extra] => {"reason": "Purchased by the customer"}
+    [created_at] => 0000-00-00 00:00:00
+    [updated_at] => 0000-00-00 00:00:00
+    [event_timestamp] => 0000-00-00 00:00:00
 )
 
-$2 >> 
-activate
+$1 >> 
+3794577c-3dbc-11ec-9bbc-0242ac130002

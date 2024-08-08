@@ -55,8 +55,6 @@ class Init
             return $this->response('Invalid signature', 403);
         }
 
-        \write_log($this->payload, $this->allowedEvents, $this->payload('event'));
-
         $event = $this->payload('event') ?? 'unknown';
         // if event is unknown, return 400
         if (!in_array($event, $this->allowedEvents)) {
@@ -69,6 +67,12 @@ class Init
 
     public function activate()
     {
+        $prev_license = LicenseModel::where('license_key', $this->payload('license_key'))->first();
+
+        if ($prev_license) {
+            return $this->response('license_key already in use', 400);
+        }
+
         $this->payload['product_id'] = Env::get('product_id');
         $this->payload['variation_id'] = Util::variation_id_by_tier($this->payload('tier'));
         LicenseModel::create($this->payload);
@@ -84,10 +88,18 @@ class Init
 
     public function upgrade()
     {
+        $prev_license = LicenseModel::where('license_key', $this->payload('license_key'))->first();
+
+        if ($prev_license) {
+            return $this->response('license_key already in use', 400);
+        }
+
         $prev_license = LicenseModel::where('license_key', $this->payload('prev_license_key'))->first();
+
         if (!$prev_license) {
             return $this->response('prev_license_key not found', 400);
         }
+
         $this->payload['user_id'] = $prev_license->user_id;
         $this->payload['product_id'] = $prev_license->product_id;
         $this->payload['variation_id'] = Util::variation_id_by_tier($this->payload('tier'));
@@ -99,10 +111,18 @@ class Init
 
     public function downgrade()
     {
+        $prev_license = LicenseModel::where('license_key', $this->payload('license_key'))->first();
+
+        if ($prev_license) {
+            return $this->response('license_key already in use', 400);
+        }
+
         $prev_license = LicenseModel::where('license_key', $this->payload('prev_license_key'))->first();
+
         if (!$prev_license) {
             return $this->response('prev_license_key not found', 400);
         }
+        
         $this->payload['user_id'] = $prev_license->user_id;
         $this->payload['product_id'] = $prev_license->product_id;
         $this->payload['variation_id'] = Util::variation_id_by_tier($this->payload('tier'));
