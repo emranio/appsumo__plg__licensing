@@ -46,7 +46,10 @@ class Init
 
     private function response($message, $status = 200)
     {
-        return new \WP_REST_Response(['message' => $message], $status);
+        return new \WP_REST_Response([
+            'success' => ($status === 200), 
+            'message' => $message
+        ], $status);
     }
 
     public function handle_request(\WP_REST_Request $request)
@@ -122,7 +125,7 @@ class Init
         if (!$prev_license) {
             return $this->response('prev_license_key not found', 400);
         }
-        
+
         $this->payload['user_id'] = $prev_license->user_id;
         $this->payload['product_id'] = $prev_license->product_id;
         $this->payload['variation_id'] = Util::variation_id_by_tier($this->payload('tier'));

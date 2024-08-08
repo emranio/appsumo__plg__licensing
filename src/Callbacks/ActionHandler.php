@@ -18,7 +18,6 @@ class ActionHandler
     {
         if (empty($_GET['code'])){
             Util::add_message("Code not found", 'error');
-            Util::add_message("Code not found", 'error');
             return;
         }
 
@@ -72,7 +71,8 @@ class ActionHandler
             return;
         }
 
-        $license = LicenseModel::get_license_by_key($license_key);
+        $license = LicenseModel::where('license_key', $license_key)->first();
+        
         if (!$license || $license->status !== 'inactive') {
             Util::add_message("License key is invalid or inactive", 'error');
             return;

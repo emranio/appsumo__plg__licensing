@@ -11,9 +11,9 @@ return [
     'product_id' => 0,
     'product_name' => 'My Product',
     'appsumo_openid_api' => 'https://appsumo.com/openid/',
-    'Oauth_redirect_url' => Util::get_page_url_by_slug('appsumo__plg__signup'),
-    'client_id' => '1234567890',
-    'client_secret' => '1234567890abcdef1234567890abcdef',
+    'Oauth_redirect_url' => Util::get_page_url_by_slug('appsumo__gutenkit__signup'),
+    'client_id' => '024136685551',
+    'client_secret' => 'c51c57e4f7afcb7709eef6a8ef84157ce63934a303d8ac7e2254d0c0',
     'tier_variations' => [
         'tier1' => 1,
         'tier2' => 2,

@@ -6,12 +6,12 @@ Template Name: Custom Template
 get_header(); ?>
 
 <div id="primary" class="content-area">
-    <main id="appsumo__plg__licensing_form-container" class="site-main">
+    <main id="appsumo__gutenkit__licensing_form-container" class="site-main">
         <!-- wp page title -->
         <h1><?php the_title(); ?></h1>
 
         <!-- sign up form with, firstname, lastname, email and password -->
-        <form action="" method="post" id="appsumo__plg__licensing_form">
+        <form action="" method="post" id="appsumo__gutenkit__licensing_form">
             <!-- display messages -->
             <?php
             $messages = Appsumo_PLG_Licensing\Util::get_messages();
