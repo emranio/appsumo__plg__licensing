@@ -1,0 +1,254 @@
+$0 >> 
+Array
+(
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [event] => activate
+    [license_status] => inactive
+    [event_timestamp] => 1318781876406
+    [created_at] => 1318738512
+    [tier] => 1
+    [test] => 
+    [extra] => Array
+        (
+            [reason] => Purchased by the customer
+        )
+
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+activate
+$0 >> 
+Array
+(
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [event] => purchase
+    [license_status] => inactive
+    [event_timestamp] => 1318781876406
+    [created_at] => 1318738512
+    [test] => 
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+purchase
+$0 >> 
+Array
+(
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [event] => purchase
+    [license_status] => inactive
+    [event_timestamp] => 1318781876406
+    [created_at] => 1318738512
+    [test] => 
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+purchase
+$0 >> 
+Array
+(
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [event] => purchase
+    [license_status] => inactive
+    [event_timestamp] => 1318781876406
+    [created_at] => 1318738512
+    [test] => 
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+purchase
+$0 >> 
+Array
+(
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [event] => activate
+    [license_status] => inactive
+    [event_timestamp] => 1318781876406
+    [created_at] => 1318738512
+    [tier] => 1
+    [test] => 
+    [extra] => Array
+        (
+            [reason] => Purchased by the customer
+        )
+
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+activate
+$0 >> 
+Array
+(
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [event] => activate
+    [license_status] => inactive
+    [event_timestamp] => 1318781876406
+    [created_at] => 1318738512
+    [tier] => 1
+    [test] => 
+    [extra] => Array
+        (
+            [reason] => Purchased by the customer
+        )
+
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+activate
+$0 >> 
+Array
+(
+    [license_key] => c86ad3d7-3942-4d11-8814-b0bd81971691
+    [prev_license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => c0e3375e7f360894ba72a988b43ab9df84f32e90e63c5a268054ae8c7c48a78e
+    [event] => upgrade
+    [event_timestamp] => 1671586387628
+    [created_at] => 1671586387624
+    [license_status] => inactive
+    [tier] => 2
+    [test] => 
+    [extra] => Array
+        (
+            [reason] => Upgraded by the customer
+        )
+
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+upgrade
+$0 >> 
+Array
+(
+    [license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => 1510ad397635386dd1ce401ddddde8886cbaa927efa0f3c66de680cfed5b7480
+    [event] => deactivate
+    [event_timestamp] => 1671586388077
+    [created_at] => 1671586388072
+    [license_status] => deactivated
+    [tier] => 1
+    [test] => 
+    [extra] => Array
+        (
+            [reason] => Upgraded by the customer
+        )
+
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+deactivate
+$0 >> 
+Array
+(
+    [license_key] => c86ad3d7-3942-4d11-8814-b0bd81971691
+    [prev_license_key] => 3794577c-3dbc-11ec-9bbc-0242ac130002
+    [plan_id] => c0e3375e7f360894ba72a988b43ab9df84f32e90e63c5a268054ae8c7c48a78e
+    [event] => upgrade
+    [event_timestamp] => 1671586387628
+    [created_at] => 1671586387624
+    [license_status] => inactive
+    [tier] => 2
+    [test] => 
+    [extra] => Array
+        (
+            [reason] => Upgraded by the customer
+        )
+
+)
+
+$1 >> 
+Array
+(
+    [0] => activate
+    [1] => deactivate
+    [2] => upgrade
+    [3] => downgrade
+    [4] => purchase
+)
+
+$2 >> 
+upgrade

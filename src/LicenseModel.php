@@ -6,6 +6,23 @@ use Dbout\WpOrm\Orm\AbstractModel;
 class LicenseModel extends AbstractModel
 {
     protected $table = 'appsumo_plg_licenses_v2';
+    protected $fillable = [
+        'license_key',
+        'product_id',
+        'user_id',
+        'tier',
+        'prev_license_key',
+        'plan_id',
+        'license_status',
+        'created_at',
+        'updated_at',
+        'extra',
+        'event_timestamp',
+    ];
+
+    protected $casts = [
+        'extra' => 'array',
+    ];
 
     public static function up()
     {
@@ -18,14 +35,16 @@ class LicenseModel extends AbstractModel
             $sql = "CREATE TABLE $table_name (
                 id mediumint(9) NOT NULL AUTO_INCREMENT,
                 license_key varchar(70) NOT NULL,
-                product_id mediumint(9) NOT NULL,
-                user_id mediumint(9) NOT NULL,
+                product_id mediumint(9) NULL,
+                user_id mediumint(9) NULL,
                 tier varchar(50) NOT NULL,
-                prev_license_key varchar(70) NOT NULL,
-                plan_id varchar(100) NOT NULL,
+                prev_license_key varchar(70) NULL,
+                plan_id varchar(100) NULL,
                 license_status varchar(20) NOT NULL,
+                extra json DEFAULT NULL,
                 created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-                event_timestamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+                updated_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+                event_timestamp datetime DEFAULT '0000-00-00 00:00:00' NULL,
                 PRIMARY KEY  (id)
             ) $charset_collate;";
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

@@ -6,8 +6,13 @@ class Init
 {
     public function __construct()
     {
-        \write_log('Init class loaded', Env::get('version'));
         // up license table
         LicenseModel::up();
+
+        // init webhooks
+        new Webhooks\Init();
+
+        // init callbacks
+        new Callbacks\Init();
     }
 }

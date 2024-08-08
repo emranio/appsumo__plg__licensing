@@ -27,7 +27,7 @@ if (!function_exists('write_log')) {
         $log_file = plugin_dir_path(__FILE__) . '/debug.log';
         foreach ($data as $key => $log) {
             if (is_array($log) || is_object($log)) {
-                file_put_contents($log_file, print_r("$$key >> \n$log", true) . PHP_EOL, FILE_APPEND);
+                file_put_contents($log_file, "$$key >> \n" . print_r($log, true) . PHP_EOL, FILE_APPEND);
             } else {
                 file_put_contents($log_file, "$$key >> \n$log" . PHP_EOL, FILE_APPEND);
             }
