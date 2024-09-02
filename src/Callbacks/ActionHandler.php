@@ -2,16 +2,37 @@
 
 namespace Appsumo_PLG_Licensing\Callbacks;
 
+if (!defined('ABSPATH')) exit();
+
 use Appsumo_PLG_Licensing\EDD;
 use Appsumo_PLG_Licensing\Env;
 use Appsumo_PLG_Licensing\LicenseModel;
 use Appsumo_PLG_Licensing\Util;
 
+/*
+|--------------------------------------------------------------------------
+| Class ActionHandler
+|--------------------------------------------------------------------------
+|
+| This class handles the actions related to the Appsumo PLG Licensing plugin.
+| It processes the access code, retrieves the access token, and manages the
+| user authentication and license assignment.
+|
+*/
 class ActionHandler
 {
+    // The access token retrieved from the cookie or API
     private $access_token = null;
+
+    // The access code retrieved from the cookie or API
     private $access_code = null;
 
+    /**
+     * Constructor to initialize the ActionHandler class.
+     *
+     * This constructor retrieves the access token and access code from cookies
+     * and processes the access code.
+     */
     public function __construct()
     {
         $this->access_token = $_COOKIE['_plg_token'] ?? null;
@@ -22,6 +43,14 @@ class ActionHandler
         $this->process__code();
     }
 
+    /**
+     * Process the access code to retrieve the license key and manage user authentication.
+     *
+     * This method retrieves the license key using the access token, checks the license status,
+     * and manages user authentication and license assignment.
+     *
+     * @return void
+     */
     public function process__code()
     {
         if ($this->access_token == null) {
@@ -110,6 +139,14 @@ class ActionHandler
         wp_redirect(Env::get('dashboard_url'));
     }
 
+    /**
+     * Retrieve the access token using the authorization code.
+     *
+     * This method sends a POST request to the Appsumo OpenID API to retrieve the access token
+     * using the authorization code. The access token is then stored in a cookie.
+     *
+     * @return void
+     */
     public function get_access_token()
     {
 

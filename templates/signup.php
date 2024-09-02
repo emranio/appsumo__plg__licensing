@@ -1,7 +1,9 @@
 <?php
 /*
-Template Name: Custom Template
+Template Name: Custom Signup Template
 */
+
+if (!defined('ABSPATH')) exit();
 
 get_header(); ?>
 
