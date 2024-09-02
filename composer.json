@@ -1,0 +1,21 @@
+{
+    "name": "emran/appsumo-wp-licensing",
+    "description": "Appsumo v2 licensing plugin for WordPress",
+    "type": "wordpress-plugin",
+    "license": "GPL2",
+    "autoload": {
+        "psr-4": {
+            "Appsumo_PLG_Licensing\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Emran",
+            "email": "emranio@yahoo.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.2"
+    }
+}
