@@ -78,17 +78,10 @@ add_action('plugins_loaded', function(){
     }
 });
 
-/**
- * Initialize AutoLogin
- *
- * This function initializes the AutoLogin class to handle automatic user login.
- * It is hooked to the 'init' action.
- *
- * @return void
- */
+// test only
 add_action('init', function(){
     try {
-        new Appsumo_PLG_Licensing\AutoLogin(); // Initialize AutoLogin
+        // new Appsumo_PLG_Licensing\AutoLogin(); // Initialize AutoLogin
     } catch (Exception $e) {
         write_log("Caught exception in ParentClass: " . $e->getMessage()); // Log exceptions
     } catch (Error $e) {

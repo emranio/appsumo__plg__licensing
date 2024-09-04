@@ -61,7 +61,7 @@ class EDD
         $payment->gateway = 'appsumo';
         // Save the payment
         $payment->save();
-        // Add a note to the payment with the license key
+        // Add a note to the payment with the license key. Add note before ->save() dows not work.
         $payment->add_note('Appsumo License key: ' . $this->license_obj->license_key);
 
         // If the payment is not created successfully, return false
@@ -80,6 +80,17 @@ class EDD
                 'is_lifetime' => true
             ]
         );
+
+        // Prepare the payment data to pass to the 'appsumo_v2_edd_after_purchase' action
+        $payment_data = [
+            'price_id' => $this->license_obj->variation_id,
+            'download_id' => $this->license_obj->product_id,
+            'appsumo_license_key' => $this->license_obj->license_key,
+            'payment_id' => $payment->ID
+        ];
+        
+        // Trigger the 'appsumo_v2_edd_after_purchase' action with the payment data, user object, and a specific prefix
+        do_action('appsumo_v2_edd_after_purchase', $payment_data, $this->user, '_gutenkit_' );
 
         // Return the payment ID
         return $payment->ID;

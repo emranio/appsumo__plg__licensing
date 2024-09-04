@@ -113,6 +113,17 @@ class ActionHandler
                 return;
             }
             $user = get_user_by('id', $user_id);
+
+            // Update user's first name and last name
+            update_user_meta($user_id, 'first_name', $_POST['first_name'] ?? '');
+            update_user_meta($user_id, 'last_name', $_POST['last_name'] ?? '');
+            
+            // Optionally, update the display name
+            wp_update_user([
+                'ID'           => $user_id,
+                'display_name' => $_POST['first_name'] ?? '' . ' ' . $_POST['last_name'] ?? ''
+            ]);
+            
         } else {
             // authenticate the user with $_POST email and password
             $user = wp_authenticate($_POST['email'], $_POST['password']);

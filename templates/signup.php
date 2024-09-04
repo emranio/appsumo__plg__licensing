@@ -25,9 +25,9 @@ get_header(); ?>
             ?>
 
             <label for="firstname">First Name:</label>
-            <input type="text" name="firstname" id="firstname">
+            <input type="text" name="first_name" id="first_name" required>
             <label for="lastname">Last Name:</label>
-            <input type="text" name="lastname" id="lastname">
+            <input type="text" name="last_name" id="last_name" required>
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" required>
             <label for="password">Password:</label>
